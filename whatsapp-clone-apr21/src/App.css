@@ -44,8 +44,8 @@
   cursor: pointer;
 } */
 body {
-  background-image: linear-gradient(rgba(0, 0, 0, 0) 0, rgb(164, 194, 173) 100%),
-    url("https://www.toptal.com/designers/subtlepatterns/patterns/leaves-pattern.png");
+  /* background-image: linear-gradient(rgba(0, 0, 0, 0) 0, rgb(164, 194, 173) 100%),
+    url("https://www.toptal.com/designers/subtlepatterns/patterns/leaves-pattern.png"); */
   font-family: Open Sans;
   background-image: fit;
 }

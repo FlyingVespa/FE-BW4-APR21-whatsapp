@@ -23,7 +23,10 @@ function RegistrationPage() {
   };
   return (
     <>
-      <Container className="login_container">
+      <Container
+        className="login_container"
+        styles={{ backgroundImage: `url("pattern.png")` }}
+      >
         <Row>
           <Col xs={6}>
             <Image src="login_logo.png"></Image>
@@ -49,7 +52,7 @@ function RegistrationPage() {
                   special character.
                 </span> */}
 
-                <Button href="/mainchat" type="submit">
+                <Button href="/main" type="submit">
                   Sign Up
                 </Button>
               </Form>

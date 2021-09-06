@@ -4,11 +4,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import LoginPage from "./components/WelcomePage/LoginPage";
 import { BrowserRouter, Route } from "react-router-dom";
 import RegistrationPage from "./components/WelcomePage/RegistrationPage";
-import MainChat from "./components/MainSection/MainChat";
+import Main from "./components/Main";
 
 function App() {
   return (
-    <div className="App" styles={{ backgroundImage: `url("pattern.png")` }}>
+    <div className="App">
       <BrowserRouter>
         <Route
           path="/signup"
@@ -24,8 +24,8 @@ function App() {
         />
         <Route
           // path="/login/:userId"
-          path="/mainchat"
-          render={(routerProps) => <MainChat routerProps={routerProps} />}
+          path="/main"
+          render={(routerProps) => <Main routerProps={routerProps} />}
         />
       </BrowserRouter>
     </div>
