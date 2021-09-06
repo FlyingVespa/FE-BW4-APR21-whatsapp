@@ -98,3 +98,9 @@ body {
   color: #818078;
   background-color: #fcfcfa;
 }
+
+.mainpage_container {
+  margin-top: 5vh;
+  border: black 10px solid;
+  margin-bottom: 5vh;
+}
