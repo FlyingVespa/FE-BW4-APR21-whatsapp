@@ -5,14 +5,12 @@ import MainTopBar from "./MainTopBar";
 
 export default function CenterCh() {
   return (
-    <div>
+    <>
+      <MainTopBar />
       <Container>
-        <MainTopBar />
-        <Container>
-          <h4>This is where the chat will show</h4>
-        </Container>
-        <ChatBar />
+        <h4>This is where the chat will show</h4>
       </Container>
-    </div>
+      <ChatBar />
+    </>
   );
 }

@@ -6,18 +6,16 @@ import { Row, Col, Container } from "react-bootstrap";
 
 export default function () {
   return (
-    <Container>
-      <Row>
-        <Col>
-          <LeftSidebar xs={3} />
-        </Col>
-        <Col>
-          <MainChat xs={6} />
-        </Col>
-        <Col>
-          <RightSidebar xs={3} />
-        </Col>
-      </Row>
-    </Container>
+    <Row>
+      <Col>
+        <LeftSidebar xs={3} />
+      </Col>
+      <Col>
+        <MainChat xs={6} />
+      </Col>
+      <Col>
+        <RightSidebar xs={3} />
+      </Col>
+    </Row>
   );
 }

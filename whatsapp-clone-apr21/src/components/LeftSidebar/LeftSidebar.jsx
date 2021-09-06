@@ -4,11 +4,9 @@ import ChatList from "./ChatList";
 
 export default function LeftSidebar() {
   return (
-    <div>
-      <Container styles={{ backgroundColor: "#FFF" }}>
-        <h2>Left</h2>
-        <ChatList />
-      </Container>
-    </div>
+    <>
+      <h2>Left</h2>
+      <ChatList />
+    </>
   );
 }
