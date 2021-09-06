@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, FormControl, Container, Row, Col } from "react-bootstrap";
-import { Paperclip, EmojiSunglasses } from "react-bootstrap-icons";
+import { Paperclip, EmojiSunglasses, Reply } from "react-bootstrap-icons";
 
 import "./mainsection.css";
 
@@ -14,13 +14,16 @@ export default function CenterChatInput() {
         <Col xs={1}>
           <Paperclip />
         </Col>
-        <Col xs={10}>
+        <Col xs={9}>
           <Form>
             <FormControl
               id="chatinputbar"
               placeholder="type something"
             ></FormControl>
           </Form>
+        </Col>
+        <Col xs={1}>
+          <Reply />
         </Col>
       </Row>
     </Container>

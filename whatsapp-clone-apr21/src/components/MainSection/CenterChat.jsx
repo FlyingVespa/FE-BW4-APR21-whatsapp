@@ -8,7 +8,11 @@ import SingleChat from "./SingleChat";
 export default function CenterChat() {
   return (
     <Container className="mainchat_container p-0 g-0">
-      <Image id="mainchat_background" src="/images/email-pattern.png" />
+      <Image
+        src={process.env.PUBLIC_URL + "/images/email-pattern.png"}
+        alt="background"
+        className="bg_image"
+      />
       <SingleChat />
       <SingleChat />
       <SingleChat />

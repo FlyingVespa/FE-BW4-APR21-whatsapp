@@ -4,7 +4,7 @@ export default function SingleChat() {
   return (
     <Container className="singlechat_container px-5 py-1">
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src="pattern.png" />
+        {/* <Card.Img variant="top" src="pattern.png" /> */}
         <Card.Body>
           <Card.Title>Card Title</Card.Title>
           <Card.Text>

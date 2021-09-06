@@ -4,6 +4,7 @@ import CenterChat from "./CenterChat";
 import CenterChatInput from "./CenterChatInput";
 import CenterTopBar from "./CenterTopBar";
 import "./mainsection.css";
+import { Image } from "react-bootstrap";
 
 export default function CenterSection() {
   return (

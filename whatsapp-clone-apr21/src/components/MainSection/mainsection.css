@@ -19,10 +19,13 @@
 .chatinput_container .row .col-1 {
   display: flex;
   justify-content: center;
+  border-radius: 100%;
   align-items: center;
 }
 .chatinput_container .row .col-1:hover {
   cursor: pointer;
+  background: grey;
+  color: aliceblue;
 }
 
 .chatinput_container .row .col-1 svg {
@@ -67,4 +70,18 @@
   background-repeat: repeat;
   background-attachment: fixed;
   /* height: 100%; */
+}
+
+.bg_image {
+  z-index: -99;
+  height: 75vh;
+  position: fixed;
+}
+
+.logout_link {
+  float: right;
+  color: #fff;
+}
+.logout_link:hover {
+  color: rgb(73, 184, 63);
 }

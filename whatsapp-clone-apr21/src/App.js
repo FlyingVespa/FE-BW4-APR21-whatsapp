@@ -8,13 +8,12 @@ import { Image } from "react-bootstrap";
 import RegistrationPage from "./components/WelcomePage/RegistrationPage";
 import Main from "./components/Main";
 // import pattern from "/images/pattern.png";
-import logo from "./logo_wa.png";
+// import logo from `process.env.PUBLIC_URL + "/logo_wa.png"`
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <img src={logo} alt="Logo" />;
         <Route
           path="/signup"
           exact
