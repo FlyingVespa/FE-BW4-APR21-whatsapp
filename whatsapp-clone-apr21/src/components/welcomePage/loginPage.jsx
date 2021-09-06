@@ -8,7 +8,7 @@ import {
   Form,
   FormControl,
 } from "react-bootstrap";
-const loginPage = () => {
+const LoginPage = () => {
   <>
     <Container>
       <Card>
@@ -18,4 +18,4 @@ const loginPage = () => {
   </>;
 };
 
-export default loginPage;
+export default LoginPage;
