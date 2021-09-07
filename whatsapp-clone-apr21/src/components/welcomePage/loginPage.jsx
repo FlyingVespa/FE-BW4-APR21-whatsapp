@@ -43,7 +43,7 @@ function LoginPage({ routerProps }) {
         localStorage.setItem("accessToken", json.accessToken);
         // localStorage.setItem("refreshToken", json.refreshToken);
         // localStorage.setItem("username", json.username);
-        // routerProps.history.push("/user");
+        routerProps.history.push("/main");
       } else {
         // setValidation(false);
         // alert("Credentials are incorrect");
@@ -89,13 +89,9 @@ function LoginPage({ routerProps }) {
                   Please make sure your password contains a letter, number and a
                   special character.
                 </span> */}
-
                 <Button id="btn-login" type="submit" xs={5}>
                   LOGIN
                 </Button>
-
-                {/* <hr class="hr-text" data-content="OR" /> */}
-
                 <Button
                   id="btn-reg"
                   href="/signup"

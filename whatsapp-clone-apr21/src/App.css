@@ -74,6 +74,7 @@
 
 .mainpage_container {
   margin-top: 5vh;
-  border: black 10px solid;
+  /* border: black 10px solid; */
   margin-bottom: 5vh;
+  filter: drop-shadow(1px 1px 3px grey);
 }

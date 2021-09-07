@@ -1,4 +1,81 @@
 .leftsidebar_container {
-  background-color: cadetblue;
+  background-color: #ededed;
   height: 100%;
+}
+
+.user_profile_img {
+  width: 20vh;
+  margin: auto;
+  display: block;
+  background: black;
+  filter: drop-shadow(1px 1px 4px rgb(240, 240, 240));
+}
+.user_profile_img:hover {
+  cursor: pointer;
+  opacity: 0.1;
+  background: linear-gradient(#e66465, #9198e5 0.7) !important;
+}
+
+.container .mainuser_name,
+.mainuser_profile,
+.mainuser_about {
+  margin-top: 20px;
+  background: #ffffff;
+  filter: drop-shadow(0px 0px 2px rgb(214, 214, 214));
+}
+.container svg {
+  font-size: 20px;
+  padding: 2px;
+  margin: 5px;
+  color: darkgray;
+  float: right;
+}
+
+.singleRoom {
+  background-color: #fff;
+}
+.singleRoom .row:hover {
+  cursor: pointer;
+  background: rgb(243, 243, 243);
+  color: black;
+}
+.mainuser_profile {
+  display: flex;
+  align-items: flex-end;
+  height: 10vh;
+  background: #00bfa5;
+  color: #fff;
+}
+
+#mainuser {
+  padding-top: 1rem;
+  color: #009688;
+}
+
+#arrow_icon {
+  color: #fff;
+  font-size: 30px;
+  font-weight: 800;
+}
+
+#mainuser_profile_img_sml {
+  height: 50px;
+  margin: 10px;
+}
+
+#singleRoom_img_small {
+  height: 40px;
+  margin-left: 10px;
+}
+
+#singleRoom_title {
+  vertical-align: middle;
+}
+.singleRoom_col_2 {
+  display: flex;
+  align-items: center;
+}
+
+.roomSearch {
+  background-color: rgb(243, 243, 243);
 }
