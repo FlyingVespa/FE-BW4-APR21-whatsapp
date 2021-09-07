@@ -13,6 +13,9 @@ export default function CenterChat() {
         alt="background"
         className="bg_image"
       />
+
+      {/* IMPLEMENT MAP FUNCTION ON CALLING ALL CHAT HISTORY HERE */}
+
       <SingleChat />
       <SingleChat />
       <SingleChat />

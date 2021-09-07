@@ -14,43 +14,43 @@ import {
 
 const LoginPage = async () => {
   const [inputErr, setInputErr] = useState(true);
-  const [validation, setValidation] = useState(true);
+  // const [validation, setValidation] = useState(true);
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
 
   const URL = process.env.REACT_APP_MONGODB_URL;
 
-  try {
-    const details = {
-      email: userEmail,
-      password: userPassword,
-    };
+  // try {
+  //   const details = {
+  //     email: userEmail,
+  //     password: userPassword,
+  //   };
 
-    const res = await fetch(`${URL}/users/login`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(details),
-    });
+  //   const res = await fetch(`${URL}/users/login`, {
+  //     method: "POST",
+  //     headers: {
+  //       "content-type": "application/json",
+  //     },
+  //     body: JSON.stringify(details),
+  //   });
 
-    if (res.ok) {
-      setValidation(true);
-      const data = await res.json();
-    } else {
-      setValidation(false);
-      alert("Credentials are incorrect");
-    }
-  } catch (error) {
-    console.log(error);
-  }
+  //   if (res.ok) {
+  //     setValidation(true);
+  //     const data = await res.json();
+  //   } else {
+  //     setValidation(false);
+  //     alert("Credentials are incorrect");
+  //   }
+  // } catch (error) {
+  //   console.log(error);
+  // }
 
-  const handleChange = (event) => {
-    const passwordRegex = new RegExp(
-      "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
-    );
-    setInputErr({ inputErr: !event.target.value.match(passwordRegex) });
-  };
+  // const handleChange = (event) => {
+  //   const passwordRegex = new RegExp(
+  //     "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+  //   );
+  //   setInputErr({ inputErr: !event.target.value.match(passwordRegex) });
+  // };
   return (
     <>
       <Container className="login_container">

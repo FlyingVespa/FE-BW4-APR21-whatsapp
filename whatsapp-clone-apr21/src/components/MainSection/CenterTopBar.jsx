@@ -26,3 +26,5 @@ export default function CenterTopBar() {
     </Container>
   );
 }
+
+// THE ROOM NAME NEEDS TO BE DISPLAYED HERE AS WELL AS ALL PARTICIPANTS

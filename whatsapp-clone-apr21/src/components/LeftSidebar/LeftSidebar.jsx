@@ -13,3 +13,4 @@ export default function LeftSidebar() {
     </>
   );
 }
+// USER PROFILE NEEDS TO POP UP HERE WITH TERNARY STATEMENT IF CLICKED TO OPEN USER INFO TAB
