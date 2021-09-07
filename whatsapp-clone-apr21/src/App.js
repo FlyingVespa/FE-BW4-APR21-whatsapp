@@ -22,7 +22,7 @@ function App() {
           )}
         />
         <Route
-          path="/"
+          path="/login"
           exact
           render={(routerProps) => <LoginPage routerProps={routerProps} />}
         />

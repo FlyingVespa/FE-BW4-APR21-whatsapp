@@ -11,41 +11,39 @@ import {
   Image,
 } from "react-bootstrap";
 
-const LoginPage = async ({ routerProps }) => {
-  // const [inputErr, setInputErr] = useState(true);
-  // const [validation, setValidation] = useState(true);
+function LoginPage({ routerProps }) {
+  const [inputErr, setInputErr] = useState(true);
+  const [validation, setValidation] = useState(true);
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   // const URL = process.env.REACT_APP_MONGODB_URL;
-  const BE_URL = "http://localhost:4545/";
+  const BE_URL = "http://localhost:4444";
 
   const login = async (event) => {
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-    }
+    event.preventDefault();
+
     try {
       const details = {
         email: userEmail,
         password: userPassword,
       };
 
-      const res = await fetch(`${BE_URL}/users/login`, {
+      const res = await fetch(`${BE_URL}/auth/login`, {
         method: "POST",
         headers: {
-          "content-type": "application/json",
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(details),
+        body: JSON.stringify(details), // { details: { email: "hello", password: "pasword" } }
       });
 
       if (res.ok) {
         // setValidation(true);
         const json = await res.json();
+        console.log(json);
         localStorage.setItem("accessToken", json.accessToken);
-        localStorage.setItem("refreshToken", json.refreshToken);
-        localStorage.setItem("username", json.username);
-        routerProps.history.push("/user");
+        // localStorage.setItem("refreshToken", json.refreshToken);
+        // localStorage.setItem("username", json.username);
+        // routerProps.history.push("/user");
       } else {
         // setValidation(false);
         // alert("Credentials are incorrect");
@@ -66,12 +64,12 @@ const LoginPage = async ({ routerProps }) => {
       <Container className="login_container">
         <Row>
           <Col xs={6}>
-            <Image src="login_logo.png"></Image>
+            <Image src="login_logo.png" />
           </Col>
           <Col xs={6}>
             <Card className="login_card">
-              <h2>Sign Up</h2>
-              <Form className="m-login-form">
+              <h2>Login9</h2>
+              <Form onSubmit={login}>
                 <FormControl
                   value={userEmail}
                   onChange={(e) => setUserEmail(e.target.value)}
@@ -92,17 +90,11 @@ const LoginPage = async ({ routerProps }) => {
                   special character.
                 </span> */}
 
-                <Button
-                  href="/login"
-                  id="btn-login"
-                  type="button"
-                  xs={5}
-                  onClick={login}
-                >
+                <Button id="btn-login" type="submit" xs={5}>
                   LOGIN
                 </Button>
 
-                <hr class="hr-text" data-content="OR" />
+                {/* <hr class="hr-text" data-content="OR" /> */}
 
                 <Button
                   id="btn-reg"
@@ -110,17 +102,23 @@ const LoginPage = async ({ routerProps }) => {
                   variant="outline-success"
                   xs={5}
                 >
-                  Register Up
+                  Register For Account
                 </Button>
+                <br />
+                <button
+                  onClick={() =>
+                    console.log(localStorage.getItem("accessToken"))
+                  }
+                >
+                  show token
+                </button>
               </Form>
-              <br />
-              <p>or</p>
             </Card>
           </Col>
         </Row>
       </Container>
     </>
   );
-};
+}
 
 export default LoginPage;
