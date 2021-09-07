@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import pattern from "..public/pattern.png";
 import LoginPage from "./components/WelcomePage/LoginPage";
 import { BrowserRouter, Route } from "react-router-dom";
-import { Image } from "react-bootstrap";
+// import { Image } from "react-bootstrap";
 import RegistrationPage from "./components/WelcomePage/RegistrationPage";
 import Main from "./components/Main";
 // import pattern from "/images/pattern.png";
@@ -22,7 +22,7 @@ function App() {
           )}
         />
         <Route
-          path="/login"
+          path="/"
           exact
           render={(routerProps) => <LoginPage routerProps={routerProps} />}
         />

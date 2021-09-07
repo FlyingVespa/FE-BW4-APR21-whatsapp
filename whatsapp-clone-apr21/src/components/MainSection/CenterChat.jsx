@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Image } from "react-bootstrap";
-import ChatBar from "./CenterChatInput";
-import MainTopBar from "./CenterTopBar";
+// import ChatBar from "./CenterChatInput";
+// import MainTopBar from "./CenterTopBar";
 import "./mainsection.css";
 import SingleChat from "./SingleChat";
 

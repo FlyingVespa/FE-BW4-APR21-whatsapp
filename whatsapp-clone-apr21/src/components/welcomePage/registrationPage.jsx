@@ -1,26 +1,26 @@
 import React from "react";
-import { useState } from "react";
+// import { useState } from "react";
 import {
   Container,
-  Card,
+  // Card,
   Row,
   Col,
   Button,
   Form,
   FormControl,
   Image,
-  Nav,
+  // Nav,
 } from "react-bootstrap";
 
 function RegistrationPage() {
-  const [inputErr, setInputErr] = useState(false);
+  // const [inputErr, setInputErr] = useState(false);
 
-  const handleChange = (event) => {
-    const passwordRegex = new RegExp(
-      "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
-    );
-    setInputErr({ inputErr: !event.target.value.match(passwordRegex) });
-  };
+  // const handleChange = (event) => {
+  //   const passwordRegex = new RegExp(
+  //     "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$"
+  //   );
+  //   setInputErr({ inputErr: !event.target.value.match(passwordRegex) });
+  // };
   return (
     <>
       <Container
@@ -43,7 +43,7 @@ function RegistrationPage() {
                 <FormControl className="mb-2" type="text" placeholder="email" />
                 <FormControl
                   className="mb-2"
-                  onChange={handleChange}
+                  // onChange={handleChange}
                   type="password"
                   placeholder="Password"
                 />
@@ -61,7 +61,6 @@ function RegistrationPage() {
                 href="/login"
                 variant="outline-success"
                 id="login_link_btn"
-                disabled
               >
                 Continue To Login
               </Button>
