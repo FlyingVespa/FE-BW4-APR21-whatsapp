@@ -5,43 +5,74 @@ import {
   Image,
   Row,
   OverlayTrigger,
-  Button,
   Tooltip,
 } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { PencilFill, ArrowLeft } from "react-bootstrap-icons";
 import "./leftsidebar.css";
 import RoomSearch from "./RoomSearch";
 import RoomList from "./RoomList";
+import AddRoom from "./AddRoom";
 
-function MainUser() {
-  const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
+const MainUser = (props) => {
+  const renderTooltip = (p) => (
+    <Tooltip id="button-tooltip" {...p}>
       Click To Change Picture
     </Tooltip>
   );
 
-  const [selectedRoom, setSelectedRoom] = useState(null);
-  const [user, setuser] = useState(null);
+  // const [selectedRoom, setSelectedRoom] = useState(null);
+  // const [user, setuser] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
 
   const URL = "http://locahost:4444";
+
+  // UPLOADING A PIC
+  // const updateProfilePic = async () => {
+  //   try {
+  //       if (pic) {
+  //           let formData = new FormData()
+  //           formData.append("avatar", pic)
+
+  //           const res = await fetch(`${URL}/users/me/profilepic`, {
+  //               method: "POST",
+  //               headers: { authorization: `Bearer ${localStorage.getItem("accessToken")}`
+  //               },
+  //               body: formData
+  //           })
+
+  //       }
+  //     } catch (error) {
+  //       console.log(error)
+  //   }
+  //     }}
 
   return (
     <>
       {!showProfile ? (
         <Container className="p-0">
           <Container className="p-0">
-            <Image
-              id="mainuser_profile_img_sml"
-              src="./monkey.jpg"
-              roundedCircle
-              onClick={() => setShowProfile(true)}
-            />
+            <Row>
+              <Col>
+                <Image
+                  id="mainuser_profile_img_sml"
+                  src="./monkey.jpg"
+                  roundedCircle
+                  onClick={() => setShowProfile(true)}
+                />
+              </Col>
+              <Col>
+                <p>{props.mainUser.username}</p>
+              </Col>
+              <Col>
+                <AddRoom />
+              </Col>
+            </Row>
           </Container>
 
           <RoomSearch />
-          <RoomList />
+          <RoomList rooms={props.rooms} />
+          {console.log(props.rooms)}
         </Container>
       ) : (
         <Container className="p-0">
@@ -77,7 +108,7 @@ function MainUser() {
             <p id="mainuser">Your Name</p>
             <Row>
               <Col>
-                <p className="text-center m-1 pt-2">User Name</p>
+                <p className="text-center m-1 pt-2">{props.username}</p>
               </Col>
               <Col>
                 <PencilFill />
@@ -103,7 +134,7 @@ function MainUser() {
       )}
     </>
   );
-}
+};
 
 export default MainUser;
 // THE LOGGED IN USER SHOULD BE DISPLAYED HERE

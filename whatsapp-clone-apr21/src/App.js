@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 // import { Image } from "react-bootstrap";
 import RegistrationPage from "./components/WelcomePage/RegistrationPage";
 import Main from "./components/Main";
+import LoginTest from "./components/WelcomePage/LoginTest";
 // import pattern from "/images/pattern.png";
 // import logo from `process.env.PUBLIC_URL + "/logo_wa.png"`
 
@@ -17,6 +18,7 @@ function App() {
   return (
     <Provider store={configureStore}>
       <BrowserRouter>
+        <Route path="/" exact component={LoginTest} />
         <Route
           path="/signup"
           exact

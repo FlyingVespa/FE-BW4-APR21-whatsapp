@@ -7,6 +7,7 @@ import SingleChat from "./SingleChat";
 // import { mainReducer } from "../../Redux/reducers/reducers";
 import { toggleState } from "../../Redux/actions/actions";
 import { connect } from "react-redux";
+import { useState } from "react";
 // import pattern from "./img/email-pattern.png";
 
 const mapStateToProps = (state) => state;
@@ -15,6 +16,19 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 function CenterChat() {
+  const [chatHistory, setChatHistory] = useState([]);
+  const getChats = async () => {
+    const URL = "http://locahost:4444";
+    try {
+      const res = await fetch(`${URL}/rooms/me`);
+
+      if (res.ok) {
+        const data = await res.json();
+        console.log("chats", data);
+        setChatHistory(data);
+      }
+    } catch (error) {}
+  };
   return (
     <Container
       className="mainchat_container p-0 g-0"
@@ -23,8 +37,17 @@ function CenterChat() {
         backgroudRepeat: "repeat",
       }}
     >
-      {/* IMPLEMENT MAP FUNCTION ON CALLING ALL CHAT HISTORY HERE */}
-
+      {chatHistory &&
+        chatHistory.map((room, i) => {
+          <SingleChat room={room} key={i} />;
+        })}
+      <SingleChat />
+      <SingleChat />
+      <SingleChat />
+      <SingleChat />
+      <SingleChat />
+      <SingleChat />
+      <SingleChat />
       <SingleChat />
       <SingleChat />
       <SingleChat />

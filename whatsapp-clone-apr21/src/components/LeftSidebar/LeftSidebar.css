@@ -79,3 +79,13 @@
 .roomSearch {
   background-color: rgb(243, 243, 243);
 }
+.dropdown-toggle::after {
+  display: none;
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+.dropdown-toggle::focus {
+  outline: none;
+}
