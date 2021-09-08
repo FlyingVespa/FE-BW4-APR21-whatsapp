@@ -7,6 +7,7 @@ import SingleChat from "./SingleChat";
 // import { mainReducer } from "../../Redux/reducers/reducers";
 import { toggleState } from "../../Redux/actions/actions";
 import { connect } from "react-redux";
+// import pattern from "./img/email-pattern.png";
 
 const mapStateToProps = (state) => state;
 const mapDispatchToProps = (dispatch) => ({
@@ -15,18 +16,13 @@ const mapDispatchToProps = (dispatch) => ({
 
 function CenterChat() {
   return (
-    <Container className="mainchat_container p-0 g-0">
-      <Button
-        onClick={() => {
-          toggleState(true);
-        }}
-      ></Button>
-      <Image
-        src={process.env.PUBLIC_URL + "/images/email-pattern.png"}
-        alt="background"
-        className="bg_image"
-      />
-
+    <Container
+      className="mainchat_container p-0 g-0"
+      style={{
+        backgroundImage: `url(${process.env.PUBLIC_URL + "/image.png"})`,
+        backgroudRepeat: "repeat",
+      }}
+    >
       {/* IMPLEMENT MAP FUNCTION ON CALLING ALL CHAT HISTORY HERE */}
 
       <SingleChat />
