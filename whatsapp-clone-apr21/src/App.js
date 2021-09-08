@@ -4,6 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // import pattern from "..public/pattern.png";
 import LoginPage from "./components/WelcomePage/LoginPage";
 import { BrowserRouter, Route } from "react-router-dom";
+import configureStore from "./Redux/store";
+import { Provider } from "react-redux";
+
 // import { Image } from "react-bootstrap";
 import RegistrationPage from "./components/WelcomePage/RegistrationPage";
 import Main from "./components/Main";
@@ -12,7 +15,7 @@ import Main from "./components/Main";
 
 function App() {
   return (
-    <div className="App">
+    <Provider store={configureStore}>
       <BrowserRouter>
         <Route
           path="/signup"
@@ -32,7 +35,7 @@ function App() {
           render={(routerProps) => <Main routerProps={routerProps} />}
         />
       </BrowserRouter>
-    </div>
+    </Provider>
   );
 }
 
