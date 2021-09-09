@@ -9,23 +9,17 @@ import { useHistory } from "react-router";
 
 import { io } from "socket.io-client";
 
-const ADDRESS = "http://localhost:4444";
-const socket = io(ADDRESS, { transports: ["websocket"] });
+const URL = process.env.REACT_APP_API_URL || "http://localhost:4444";
+const socket = io(URL, { transports: ["websocket"] });
 
 const Main = (props) => {
   const history = useHistory();
   const user = useSelector((s) => s.user);
   const dispatch = useDispatch();
 
-  const setUser = () => {
-    dispatch({ type: "SET_USER", payload: mainUser });
-  };
-
-  const [showRightbar, setShowRightbar] = useState(false);
   const [rooms, setRooms] = useState([]);
   const [mainUser, setMainUser] = useState(null);
 
-  const URL = "http://localhost:4444";
   const getRooms = async () => {
     try {
       const res = await fetch(`${URL}/rooms/me`);
@@ -49,7 +43,6 @@ const Main = (props) => {
         console.log("user:", data);
         dispatch({ type: "SET_USER", payload: data });
         localStorage.setItem("USER_ID", data._id);
-
         socket.emit("login", { userId: data._id });
       }
     } catch (error) {}
@@ -71,10 +64,27 @@ const Main = (props) => {
     } catch (error) {}
   };
 
+  const getMyRooms = async () => {
+    try {
+      const res = await fetch(`${URL}/rooms/me`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        console.log("ROOMS", data);
+        dispatch({ type: "STORE_ROOMS", payload: data });
+      }
+    } catch (error) {}
+  };
+
   useEffect(() => {
     getRooms();
     getMainUser();
     getAllUsers();
+    getMyRooms();
   }, []);
 
   useEffect(() => {
@@ -88,6 +98,7 @@ const Main = (props) => {
       <Row>
         <LeftSidebar mainUser={mainUser} />
         <CenterSection rooms={rooms} mainUser={mainUser} r />
+        <RightSidebar />
       </Row>
     </Container>
   );

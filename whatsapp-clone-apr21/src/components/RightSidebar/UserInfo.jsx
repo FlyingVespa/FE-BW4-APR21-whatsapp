@@ -1,15 +1,15 @@
 import React from "react";
 
-export default function UserInfo({ room, i }) {
+export default function UserInfo({ r }) {
   return (
     <>
       <ul>
-        {room.participants[i].map(
-          (r) => (
-            <li>{r}</li>
+        {/* {r?.participants.map(
+          (rr) => (
+            <li>{rr}</li>
           ),
-          console.log("r:", room)
-        )}
+          console.log("r:", r)
+        )} */}
       </ul>
     </>
   );

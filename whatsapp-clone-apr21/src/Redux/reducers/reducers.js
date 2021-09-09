@@ -2,6 +2,7 @@ const initialState = {
   selectedRoom: null,
   user: null,
   sidebarOpen: false,
+  rooms: null,
 };
 
 export const appReducer = (state = initialState, action) => {
@@ -17,6 +18,11 @@ export const appReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
+      };
+    case "STORE_ROOMS":
+      return {
+        ...state,
+        rooms: action.payload,
       };
 
     default:

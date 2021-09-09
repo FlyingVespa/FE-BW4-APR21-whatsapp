@@ -120,9 +120,8 @@ const LeftSidebar = (props) => {
                   </Col>
                 </Row>
               </Container>
-
               <RoomSearch />
-              {user && <RoomList mainUser={user} />}
+              <RoomList mainUser={user} />
             </Container>
           ) : (
             <Container className="p-0">
