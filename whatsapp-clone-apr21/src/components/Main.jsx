@@ -13,7 +13,7 @@ const Main = () => {
   const URL = "http://localhost:4444";
   const getRooms = async () => {
     try {
-      const res = await fetch(`${URL}/rooms`);
+      const res = await fetch(`${URL}/rooms/me`);
       if (res.ok) {
         const data = await res.json();
         setRooms(data);

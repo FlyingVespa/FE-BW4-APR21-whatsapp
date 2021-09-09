@@ -9,6 +9,7 @@ import {
   Form,
   FormControl,
   Image,
+  InputGroup,
   // Nav,
 } from "react-bootstrap";
 
@@ -18,6 +19,7 @@ function RegistrationPage({ routerProps }) {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [userName, setUserName] = useState("");
+  const [userAvatar, setUserAvatar] = useState("");
 
   const REG_URL = "http://localhost:4444";
   const register = async (e) => {
@@ -27,6 +29,7 @@ function RegistrationPage({ routerProps }) {
         email: userEmail,
         password: userPassword,
         username: userName,
+        avatar: userAvatar,
       };
 
       const res = await fetch(`${REG_URL}/auth/register`, {
@@ -86,6 +89,14 @@ function RegistrationPage({ routerProps }) {
                   placeholder="Password"
                   onChange={(e) => setUserPassword(e.target.value)}
                 />
+                <InputGroup>
+                  <FormControl
+                    className="mb-2"
+                    type="file"
+                    placeholder="Choose File"
+                    onChange={(e) => setUserAvatar(e.target.value)}
+                  />
+                </InputGroup>
                 <Button type="submit">Sign Up</Button>
               </Form>
               <hr />

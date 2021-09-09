@@ -89,3 +89,9 @@
 .dropdown-toggle::focus {
   outline: none;
 }
+
+#mainUser_name {
+  margin-top: 1rem;
+  text-align: center;
+  vertical-align: baseline;
+}

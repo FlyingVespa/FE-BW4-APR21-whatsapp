@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Col,
   Container,
@@ -6,6 +6,10 @@ import {
   Row,
   OverlayTrigger,
   Tooltip,
+  FormControl,
+  FormGroup,
+  InputGroup,
+  Button,
 } from "react-bootstrap";
 import { useState } from "react";
 import { PencilFill, ArrowLeft } from "react-bootstrap-icons";
@@ -22,30 +26,56 @@ const MainUser = (props) => {
   );
 
   // const [selectedRoom, setSelectedRoom] = useState(null);
-  // const [user, setuser] = useState(null);
+  const [mainUser, setMainUser] = useState(null);
   const [showProfile, setShowProfile] = useState(false);
 
+  const [avatar, setAvatar] = useState(null);
   const URL = "http://locahost:4444";
 
   // UPLOADING A PIC
-  // const updateProfilePic = async () => {
-  //   try {
-  //       if (pic) {
-  //           let formData = new FormData()
-  //           formData.append("avatar", pic)
+  const updateProfilePic = async () => {
+    try {
+      if (avatar) {
+        let formData = new FormData();
+        formData.append("avatar", avatar);
+        const res = await fetch(`${URL}/users/me/upload`, {
+          method: "POST",
+          headers: {
+            authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: formData,
+        });
+        console.log(res);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const updateMainUser = async () => {
+    const details = {
+      email: "",
+      username: "",
+      avatar: "",
+    };
+    try {
+      const res = await fetch(`${URL}/users/me`, {
+        method: "POST",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(details),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        console.log("user:", data);
+        setMainUser(data);
+      }
+    } catch (error) {}
+  };
 
-  //           const res = await fetch(`${URL}/users/me/profilepic`, {
-  //               method: "POST",
-  //               headers: { authorization: `Bearer ${localStorage.getItem("accessToken")}`
-  //               },
-  //               body: formData
-  //           })
-
-  //       }
-  //     } catch (error) {
-  //       console.log(error)
-  //   }
-  //     }}
+  useEffect(() => {
+    updateProfilePic();
+  }, []);
 
   return (
     <>
@@ -62,7 +92,7 @@ const MainUser = (props) => {
                 />
               </Col>
               <Col>
-                <p>{props.mainUser.username}</p>
+                <h3 id="mainUser_name">{props.mainUser.username}</h3>
               </Col>
               <Col>
                 <AddRoom />
@@ -71,7 +101,7 @@ const MainUser = (props) => {
           </Container>
 
           <RoomSearch />
-          <RoomList rooms={props.rooms} />
+          <RoomList rooms={props.rooms} mainUser={props.mainUser} />
           {console.log(props.rooms)}
         </Container>
       ) : (
@@ -103,12 +133,41 @@ const MainUser = (props) => {
                 roundedCircle
               />
             </OverlayTrigger>
+
+            <InputGroup className="mt-3">
+              <FormControl
+                onChange={(e) => setAvatar(e.target.files[0])}
+                type="file"
+              />
+              <Button
+                variant="outline-secondary"
+                onClick={() => {
+                  updateProfilePic();
+                  console.log("upload clicked");
+                }}
+              >
+                Upload
+              </Button>
+            </InputGroup>
           </Container>
           <Container className="mainuser_name ">
             <p id="mainuser">Your Name</p>
             <Row>
               <Col>
-                <p className="text-center m-1 pt-2">{props.username}</p>
+                <p className="text-center m-1 pt-2">
+                  {props.mainUser.username}
+                </p>
+              </Col>
+              <Col>
+                <PencilFill />
+              </Col>
+            </Row>
+          </Container>
+          <Container className="mainuser_about">
+            <p id="mainuser">Email</p>
+            <Row>
+              <Col>
+                <p className="text-center m-0 p-0">{props.mainUser.email}</p>
               </Col>
               <Col>
                 <PencilFill />
@@ -123,7 +182,7 @@ const MainUser = (props) => {
             <p id="mainuser">About</p>
             <Row>
               <Col>
-                <p className="text-center m-0 p-0">This is the status</p>
+                <p className="text-center m-0 p-0">{props.mainUser.status}</p>
               </Col>
               <Col>
                 <PencilFill />
