@@ -14,9 +14,9 @@ const RightSidebar = (props) => {
       <Col className="p-0" xs={3}>
         <Container className="rightsidebar_container p-0">
           <h2>RIGHT</h2>
-          {props.rooms.map((room, i) => {
-            <UserInfo key={i} room={room} />;
-          })}
+          {props.rooms.map((room, i) => (
+            <UserInfo key={i} room={room} />
+          ))}
         </Container>
       </Col>
     );
