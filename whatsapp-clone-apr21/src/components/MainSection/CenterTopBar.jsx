@@ -1,12 +1,20 @@
 import React from "react";
 import { Navbar, Container, Nav, Image } from "react-bootstrap";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function CenterTopBar() {
+  const sidebarOpen = useSelector((s) => s.sidebarOpen);
+  const dispatch = useDispatch();
+
+  const showSidebar = () => {
+    dispatch({ type: "TOGGLE_SIDEBAR", payload: !sidebarOpen });
+  };
+
   return (
     <Container className="p-0 g-0">
       <Navbar bg="dark" variant="dark">
         <Nav className="me-auto">
-          <Navbar.Brand href="/signup">
+          <Navbar.Brand>
             <Image
               alt=""
               src="./logo_wa.png"
@@ -15,6 +23,7 @@ export default function CenterTopBar() {
               className="d-inline-block align-top mx-3"
             />
             Room Name
+            <button onClick={showSidebar}>show sidebar</button>
           </Navbar.Brand>
         </Nav>
         <Nav>

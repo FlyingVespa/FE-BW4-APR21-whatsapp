@@ -1,30 +1,22 @@
-import { initialState } from "../store";
-
-export const rightbarReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "TOGGLE_STATE":
-      return { ...state, isOpen: !state.isOpen };
-
-    default:
-      return state;
-  }
-};
-export const roomSelectReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case "ROOM_SELECT":
-      return { ...state, isSelect: !state.isSelect };
-
-    default:
-      return state;
-  }
+const initialState = {
+  selectedRoom: null,
+  user: null,
+  sidebarOpen: false,
 };
 
-export const userReducer = (state = initialState.user, action) => {
+export const appReducer = (state = initialState, action) => {
+  console.log(action);
   switch (action.type) {
-    case "SET_USERNAME":
+    case "TOGGLE_SIDEBAR":
+      return { ...state, sidebarOpen: action.payload };
+
+    case "CHANGE_ROOM":
+      return { ...state, selectedRoom: action.payload };
+
+    case "SET_USER":
       return {
         ...state,
-        username: action.payload,
+        user: action.payload,
       };
 
     default:

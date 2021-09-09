@@ -5,10 +5,11 @@ import CenterSection from "./MainSection/CenterSection";
 import { Row, Col, Container, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 
-const Main = () => {
+const Main = (props) => {
   const [showRightbar, setShowRightbar] = useState(false);
+
   const [rooms, setRooms] = useState([]);
-  const [mainUser, setMainUser] = useState([]);
+  const [mainUser, setMainUser] = useState(null);
 
   const URL = "http://localhost:4444";
   const getRooms = async () => {
@@ -26,7 +27,7 @@ const Main = () => {
       const res = await fetch(`${URL}/users/me`, {
         method: "GET",
         headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       });
       if (res.ok) {
@@ -37,9 +38,26 @@ const Main = () => {
     } catch (error) {}
   };
 
+  const getAllUsers = async () => {
+    try {
+      const res = await fetch(`${URL}/users`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        console.log("AllUSERS:", data);
+        setMainUser(data);
+      }
+    } catch (error) {}
+  };
+
   useEffect(() => {
     getRooms();
     getMainUser();
+    getAllUsers();
   }, []);
 
   return (
@@ -72,14 +90,16 @@ const Main = () => {
         ) : (
           <>
             <Col className="p-0" xs={3}>
-              <LeftSidebar rooms={rooms} mainUser={mainUser} />
+              <LeftSidebar
+                rooms={rooms}
+                mainUser={mainUser}
+                routerProps={props.routerProps}
+              />
             </Col>
-            <Col className="p-0" xs={6}>
-              <CenterSection rooms={rooms} mainUser={mainUser} />
-            </Col>
-            <Col className="p-0" xs={3}>
-              <RightSidebar rooms={rooms} mainUser={mainUser} />
-            </Col>
+
+            <CenterSection rooms={rooms} mainUser={mainUser} r />
+
+            <RightSidebar rooms={rooms} mainUser={mainUser} />
           </>
         )}
       </Row>

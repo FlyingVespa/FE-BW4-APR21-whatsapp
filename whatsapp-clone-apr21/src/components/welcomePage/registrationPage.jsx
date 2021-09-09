@@ -21,7 +21,7 @@ function RegistrationPage({ routerProps }) {
   const [userName, setUserName] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
 
-  const REG_URL = "http://localhost:4444";
+  const URL = "http://localhost:4444";
   const register = async (e) => {
     e.preventDefault();
     try {
@@ -32,7 +32,7 @@ function RegistrationPage({ routerProps }) {
         avatar: userAvatar,
       };
 
-      const res = await fetch(`${REG_URL}/auth/register`, {
+      const res = await fetch(`${URL}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +94,7 @@ function RegistrationPage({ routerProps }) {
                     className="mb-2"
                     type="file"
                     placeholder="Choose File"
-                    onChange={(e) => setUserAvatar(e.target.value)}
+                    onChange={(e) => setUserAvatar(URL + e.target.value)}
                   />
                 </InputGroup>
                 <Button type="submit">Sign Up</Button>

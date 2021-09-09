@@ -17,6 +17,8 @@ import "./leftsidebar.css";
 import RoomSearch from "./RoomSearch";
 import RoomList from "./RoomList";
 import AddRoom from "./AddRoom";
+import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const MainUser = (props) => {
   const renderTooltip = (p) => (
@@ -25,17 +27,42 @@ const MainUser = (props) => {
     </Tooltip>
   );
 
+  const history = useHistory();
+
   // const [selectedRoom, setSelectedRoom] = useState(null);
-  const [mainUser, setMainUser] = useState(null);
+
+  const user = useSelector((s) => s.user);
+  const selectedRoom = useSelector((s) => s.selectedRoom);
+
   const [showProfile, setShowProfile] = useState(false);
+  const [delTask, setDelTask] = useState(false);
 
   const [avatar, setAvatar] = useState(null);
   const URL = "http://locahost:4444";
 
   // UPLOADING A PIC
+  const deleteAccount = async () => {
+    try {
+      const res = await fetch(`${URL}/users/me`, {
+        method: "DELETE",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+      if (res.ok) {
+        console.log("Account Delted");
+        props.routerProps.history.push("/login");
+      }
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const updateProfilePic = async () => {
     try {
       if (avatar) {
+        console.log(avatar);
         let formData = new FormData();
         formData.append("avatar", avatar);
         const res = await fetch(`${URL}/users/me/upload`, {
@@ -51,31 +78,31 @@ const MainUser = (props) => {
       console.log(error);
     }
   };
-  const updateMainUser = async () => {
-    const details = {
-      email: "",
-      username: "",
-      avatar: "",
-    };
-    try {
-      const res = await fetch(`${URL}/users/me`, {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-        body: JSON.stringify(details),
-      });
-      if (res.ok) {
-        const data = await res.json();
-        console.log("user:", data);
-        setMainUser(data);
-      }
-    } catch (error) {}
-  };
+  // const updateMainUser = async () => {
+  //   const details = {
+  //     email: props.userMain.email,
+  //     username: props.userMain.username,
+  //     avatar: props.userMain.avatar,
+  //   };
+  //   try {
+  //     const res = await fetch(`${URL}/users/me`, {
+  //       method: "POST",
+  //       headers: {
+  //         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+  //       },
+  //       body: JSON.stringify(details),
+  //     });
+  //     if (res.ok) {
+  //       const data = await res.json();
+  //       console.log("user:", data);
+  //       //setMainUser(data);
+  //     }
+  //   } catch (error) {}
+  // };
 
-  useEffect(() => {
-    updateProfilePic();
-  }, []);
+  // useEffect(() => {
+  //   updateMainUser();
+  // }, []);
 
   return (
     <>
@@ -92,7 +119,7 @@ const MainUser = (props) => {
                 />
               </Col>
               <Col>
-                <h3 id="mainUser_name">{props.mainUser.username}</h3>
+                <h3 id="mainUser_name">{user?.username}</h3>
               </Col>
               <Col>
                 <AddRoom />
@@ -101,8 +128,7 @@ const MainUser = (props) => {
           </Container>
 
           <RoomSearch />
-          <RoomList rooms={props.rooms} mainUser={props.mainUser} />
-          {console.log(props.rooms)}
+          {user && <RoomList rooms={props.rooms} mainUser={user} />}
         </Container>
       ) : (
         <Container className="p-0">

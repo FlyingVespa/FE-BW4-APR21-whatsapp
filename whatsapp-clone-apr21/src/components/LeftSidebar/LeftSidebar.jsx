@@ -7,7 +7,7 @@ const LeftSidebar = (props) => {
   return (
     <>
       <Container className="leftsidebar_container p-0">
-        <MainUser rooms={props.rooms} mainUser={props.mainUser} />
+        <MainUser />
       </Container>
     </>
   );
