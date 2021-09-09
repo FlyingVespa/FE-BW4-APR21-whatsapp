@@ -19,6 +19,10 @@ const Main = (props) => {
 
   const [rooms, setRooms] = useState([]);
   const [mainUser, setMainUser] = useState(null);
+  const [chatHistory, setChatHistory] = useState("");
+  const [message, setMessage] = useState("");
+  const [onlineUsers, setOnlineUsers] = useState("");
+  const [loggedin, setLoggedin] = useState(false);
 
   const getRooms = async () => {
     try {
@@ -80,16 +84,58 @@ const Main = (props) => {
     } catch (error) {}
   };
 
+  const handleUsername = (e) => {
+    e.preventDefault();
+    console.log("sending username...");
+    socket.emit("setUsername", { username: user.name });
+  };
+  const handleMessage = (e) => {
+    e.preventDefault();
+    if (user) {
+      console.log("sending new message...");
+      const newMessage = {
+        text: message,
+        sender: user.username,
+        timestamp: Date.now(),
+        id: socket.id,
+      };
+      socket.emit("sendmessage", newMessage);
+      setChatHistory([...chatHistory, newMessage]);
+      setMessage("");
+    }
+  };
+
+  const checkOnlineUsers = async () => {
+    try {
+      const response = await fetch(URL + "/users/online");
+      const data = await response.json();
+      setOnlineUsers(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getRooms();
     getMainUser();
     getAllUsers();
     getMyRooms();
-  }, []);
-
-  useEffect(() => {
     socket.on("connect", () => {
       console.log("Connected successfully to socket io server");
+    });
+    socket.on("loggedin", () => {
+      console.log("Successfully logged in!");
+      setLoggedin(true);
+      checkOnlineUsers();
+      socket.on("message", (message) => {
+        console.log("a new message was received!");
+        setChatHistory([...chatHistory, message]);
+      });
+    });
+
+    socket.on("newConnection", () => {
+      console.log("new user logged in!");
+      checkOnlineUsers();
     });
   }, []);
 
