@@ -27,9 +27,10 @@ const LeftSidebar = (props) => {
     </Tooltip>
   );
 
+  const [selected, setSelected] = useState("");
   const history = useHistory();
   const user = useSelector((s) => s.user);
-  const selectedRoom = useSelector((s) => s.selectedRoom);
+
   const [showProfile, setShowProfile] = useState(false);
   const [avatar, setAvatar] = useState(null);
   const URL = "http://locahost:4444";
@@ -107,7 +108,7 @@ const LeftSidebar = (props) => {
                   <Col>
                     <Image
                       id="mainuser_profile_img_sml"
-                      src="./monkey.jpg"
+                      src={user?.avatar}
                       roundedCircle
                       onClick={() => setShowProfile(true)}
                     />
@@ -148,7 +149,7 @@ const LeftSidebar = (props) => {
                 >
                   <Image
                     className="user_profile_img mt-2"
-                    src={props.mainUser.avatar || "./monkey.jpg"}
+                    src={user.avatar}
                     roundedCircle
                   />
                 </OverlayTrigger>
@@ -173,9 +174,7 @@ const LeftSidebar = (props) => {
                 <p id="mainuser">Your Name</p>
                 <Row>
                   <Col>
-                    <p className="text-center m-1 pt-2">
-                      {props.mainUser.username}
-                    </p>
+                    <p className="text-center m-1 pt-2">{user.username}</p>
                   </Col>
                   <Col>
                     <PencilFill />
@@ -186,9 +185,7 @@ const LeftSidebar = (props) => {
                 <p id="mainuser">Email</p>
                 <Row>
                   <Col>
-                    <p className="text-center m-0 p-0">
-                      {props.mainUser.email}
-                    </p>
+                    <p className="text-center m-0 p-0">{user.email}</p>
                   </Col>
                   <Col>
                     <PencilFill />
@@ -203,9 +200,7 @@ const LeftSidebar = (props) => {
                 <p id="mainuser">About</p>
                 <Row>
                   <Col>
-                    <p className="text-center m-0 p-0">
-                      {props.mainUser.status}
-                    </p>
+                    <p className="text-center m-0 p-0">{user.status}</p>
                   </Col>
                   <Col>
                     <PencilFill />
