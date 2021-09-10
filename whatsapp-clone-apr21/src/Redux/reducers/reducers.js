@@ -32,9 +32,7 @@ export const appReducer = (state = initialState, action) => {
       const { roomId, message, sender } = action.payload;
       const room = state.rooms.find((room) => room._id === roomId);
       const newChatHistory = room.chatHistory.concat({ message, sender });
-
       room.chatHistory = newChatHistory;
-
       if (sender === state.user._id) {
         state.socket.emit("sendMessage", { message, sender });
       }

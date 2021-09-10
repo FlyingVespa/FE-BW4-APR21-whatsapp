@@ -15,6 +15,7 @@ const socket = io(URL, { transports: ["websocket"] });
 const Main = () => {
   const user = useSelector((s) => s.user);
   const rooms = useSelector((s) => s.rooms);
+  const allUsers = useSelector((s) => s.allUsers);
   const dispatch = useDispatch();
 
   // const [rooms, setRooms] = useState([]);
@@ -35,6 +36,19 @@ const Main = () => {
     } catch (error) {}
   };
 
+  const getAllUsers = async () => {
+    try {
+      const res = await fetch(`${URL}/users`);
+      if (res.ok) {
+        const datas = await res.json();
+        await dispatch({ type: "STORE_USERS", payload: datas });
+      }
+    } catch (error) {}
+  };
+  useEffect(() => {
+    getAllUsers();
+  }, [allUsers]);
+
   useEffect(() => {
     dispatch({ type: "INIT_SOCKET", payload: socket });
   }, []);
@@ -53,22 +67,6 @@ const Main = () => {
         dispatch({ type: "SET_USER", payload: data });
         localStorage.setItem("USER_ID", data._id);
         socket.emit("login", { userId: data._id });
-      }
-    } catch (error) {}
-  };
-
-  const getAllUsers = async () => {
-    try {
-      const res = await fetch(`${URL}/users`, {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      });
-      if (res.ok) {
-        const data = await res.json();
-        console.log("AllUSERS:", data);
-        // dispatch({ type: "SET_USER", payload: data });
       }
     } catch (error) {}
   };
@@ -123,7 +121,6 @@ const Main = () => {
   useEffect(() => {
     getRooms();
     getMainUser();
-    getAllUsers();
     getMyRooms();
     // SOCKET CODE_______________________________________________
     socket.on("connect", () => {

@@ -10,7 +10,7 @@ function AddRoom() {
   const [roomName, setRoomName] = useState("");
   const [roomParticipants, setRoomParticipants] = useState("");
   const users = useSelector((s) => s.allUsers);
-
+  const dispatch = useDispatch();
   if (users) {
     setAllUsers(users._id);
     console.log("all", allUsers);
@@ -21,6 +21,20 @@ function AddRoom() {
   const handleShow = () => setShowAddRoomModal(true);
 
   const URL = "http://localhost:4444";
+  const getAllUsers = async () => {
+    try {
+      const res = await fetch(`${URL}/users`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        await dispatch({ type: "STORE_USERS", payload: data });
+      }
+    } catch (error) {}
+  };
 
   const createRoom = async () => {
     try {
@@ -54,7 +68,9 @@ function AddRoom() {
             <ThreeDotsVertical />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            <Dropdown.Item onClick={handleShow}>Create New Room</Dropdown.Item>
+            <Dropdown.Item onClick={getAllUsers && handleShow}>
+              Create New Room
+            </Dropdown.Item>
             <Dropdown.Item href="#/action-2">Starred</Dropdown.Item>
             <Dropdown.Item href="#/action-3">Settings</Dropdown.Item>
           </Dropdown.Menu>
@@ -66,7 +82,7 @@ function AddRoom() {
           <Modal.Title>Create new Room</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={createRoom}>
             <Form.Group className="mb-3" controlId="roomName">
               <Form.Label>Room Name</Form.Label>
               <Form.Control
