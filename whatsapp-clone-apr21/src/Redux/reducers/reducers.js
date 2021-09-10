@@ -11,7 +11,7 @@ export const appReducer = (state = initialState, action) => {
     case "TOGGLE_SIDEBAR":
       return { ...state, sidebarOpen: action.payload };
 
-    case "CHANGE_ROOM":
+    case "SELECT_ROOM":
       return { ...state, selectedRoom: action.payload };
 
     case "SET_USER":

@@ -30,7 +30,7 @@ const LeftSidebar = (props) => {
   const [selected, setSelected] = useState("");
   const history = useHistory();
   const user = useSelector((s) => s.user);
-  const selectedRoom = useSelector((s) => s.selectedRoom);
+
   const [showProfile, setShowProfile] = useState(false);
   const [avatar, setAvatar] = useState(null);
   const URL = "http://locahost:4444";
@@ -108,7 +108,7 @@ const LeftSidebar = (props) => {
                   <Col>
                     <Image
                       id="mainuser_profile_img_sml"
-                      src="./monkey.jpg"
+                      src={user?.avatar}
                       roundedCircle
                       onClick={() => setShowProfile(true)}
                     />

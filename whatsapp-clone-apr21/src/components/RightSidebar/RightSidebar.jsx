@@ -7,17 +7,18 @@ import { useSelector } from "react-redux";
 
 const RightSidebar = () => {
   const sidebarOpen = useSelector((s) => s.sidebarOpen);
-  const rooms = useSelector((state) => state.rooms);
+  const rooms = useSelector((s) => s.rooms);
+  const activeRoom = useSelector((s) => s.selectedRoom);
+
   const d_none = sidebarOpen ? "" : "d-none";
   return (
     <>
       <Col className={"p-0 " + d_none} xs={3}>
         <Container className="rightsidebar_container p-0">
-          <h2>RIGHT</h2>
-          {rooms &&
-            rooms.map((room) => {
-              return room?.participants.map((p) => <p>{p.username}</p>);
-            })}
+          <h2>{activeRoom?.name}</h2>
+          {activeRoom?.participants.map((p) => {
+            return <p>{p?.username}</p>;
+          })}
         </Container>
       </Col>
     </>
