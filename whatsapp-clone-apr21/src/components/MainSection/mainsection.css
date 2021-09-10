@@ -85,3 +85,7 @@
 .logout_link:hover {
   color: rgb(73, 184, 63);
 }
+
+#showright {
+  cursor: pointer;
+}

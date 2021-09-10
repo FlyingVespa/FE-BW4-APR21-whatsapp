@@ -5,6 +5,7 @@ import { Paperclip, EmojiSunglasses, Reply } from "react-bootstrap-icons";
 import "./mainsection.css";
 
 export default function CenterChatInput() {
+  // need to send / emit messages here
   return (
     <Container className="chatinput_container p-2 g-0 ">
       <Row>
