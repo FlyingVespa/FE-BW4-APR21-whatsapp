@@ -22,11 +22,12 @@ const RoomList = () => {
   return (
     <Container className="p-0 m-0">
       {rooms &&
-        rooms.map((room) => (
+        rooms.map((room, i) => (
           <Container className="singleRoom p-0 m-0">
             <Row
               className=" px-0 py-2 m-0 border-bottom"
               onClick={() => changeRoom(room)}
+              key={i}
             >
               <Col className="p-0 m-0" xs={4}>
                 <Image
@@ -36,7 +37,7 @@ const RoomList = () => {
                 />
               </Col>
               <Col className="p-0 m-0 singleRoom_col_2" xs={8}>
-                <p id="singleRoom_title">{room.name}</p>
+                <p id="singleRoom_title">{room._id}</p>
               </Col>
             </Row>
           </Container>

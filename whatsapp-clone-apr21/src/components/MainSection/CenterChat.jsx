@@ -18,7 +18,7 @@ function CenterChat() {
       }}
     >
       {
-        activeRoom && <span>{activeRoom.chatHistory[0]?.[0]}</span>
+        activeRoom && <span>{activeRoom.chatHistory[0]?.message}</span>
         //     activeRoom.chatHistory.map((c) => {
         //       <Container className="singlechat_container px-5 py-1">
         //         <Card style={{ width: "18rem" }}>

@@ -3,6 +3,8 @@ const initialState = {
   user: null,
   sidebarOpen: false,
   rooms: null,
+  socket: null,
+  allUsers: null,
 };
 
 export const appReducer = (state = initialState, action) => {
@@ -14,15 +16,31 @@ export const appReducer = (state = initialState, action) => {
     case "SELECT_ROOM":
       return { ...state, selectedRoom: action.payload };
 
+    case "STORE_USERS":
+      return { ...state, allUsers: action.payload };
+
     case "SET_USER":
-      return {
-        ...state,
-        user: action.payload,
-      };
+      return { ...state, user: action.payload };
+
     case "STORE_ROOMS":
+      return { ...state, rooms: action.payload };
+
+    case "INIT_SOCKET":
+      return { ...state, socket: action.payload };
+
+    case "PUSH_MESSAGE":
+      const { roomId, message, sender } = action.payload;
+      const room = state.rooms.find((room) => room._id === roomId);
+      const newChatHistory = room.chatHistory.concat({ message, sender });
+
+      room.chatHistory = newChatHistory;
+
+      if (sender === state.user._id) {
+        state.socket.emit("sendMessage", { message, sender });
+      }
+
       return {
         ...state,
-        rooms: action.payload,
       };
 
     default:
